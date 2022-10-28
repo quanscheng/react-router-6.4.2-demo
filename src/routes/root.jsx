@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import {
   Form,
   NavLink,
@@ -32,6 +33,14 @@ export default function Root() {
   //   setQuery(q)
   // }, [q])
 
+  const searching =
+    navigation.location &&
+    new URLSearchParams(navigation.location.search).has('q')
+
+  useEffect(() => {
+    document.getElementById('q').value = q
+  }, [q])
+
   return (
     <>
       <div id='sidebar'>
@@ -47,6 +56,7 @@ export default function Root() {
               placeholder='Search'
               type='search'
               name='q'
+              className={searching ? 'loading' : ''}
               // value={query}
               // onChange={(e) => {
               //   setQuery(e.target.value)
@@ -59,7 +69,7 @@ export default function Root() {
             <div
               id='search-spinner'
               aria-hidden
-              hidden={true}
+              hidden={!searching}
             />
             <div
               className='sr-only'
