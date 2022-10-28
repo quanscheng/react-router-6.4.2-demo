@@ -12,6 +12,7 @@ import { deleteContact } from '../contacts'
  */
 
 export async function action({ params }) {
+  // throw new Error("oh dang!"); // 打开此处注释查看 main: errorElement: <div>Oops! There was an error.</div>,的效果
   await deleteContact(params.contactId)
   return redirect('/')
 }
